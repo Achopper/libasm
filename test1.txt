@@ -1,0 +1,1 @@
+testing ft_write and read in file, if you see this test is succsessful

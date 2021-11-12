@@ -1,0 +1,23 @@
+     1                                  global _ft_strdup
+     2                                  
+     3                                  extern _ft_strlen
+     4                                  extern _ft_strcpy
+     5                                  extern _malloc
+     6                                  
+     7                                  ;char*     strdup(const char *s1);
+     8                                  
+     9                                  section .text
+    10                                  _ft_strdup:
+    11 00000000 4889FE                          mov rsi, rdi
+    12 00000003 E8(00000000)                    call _ft_strlen
+    13 00000008 48FFC0                          inc rax             ;+1 byte for \0
+    14 0000000B 4889C7                          mov rdi, rax        ;mov strlen res in malloc 1st arg
+    15 0000000E 56                              push rsi            ;push *s1 on stack
+    16 0000000F E8(00000000)                    call _malloc
+    17 00000014 5E                              pop rsi
+    18 00000015 4883F800                        cmp rax, 0x0        ;test malloc err
+    19 00000019 7408                            je .err
+    20 0000001B 4889C7                          mov rdi, rax
+    21 0000001E E8(00000000)                    call _ft_strcpy
+    22 00000023 C3                      .err:   ret
+    23                                  
